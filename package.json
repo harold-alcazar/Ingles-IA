@@ -5,9 +5,10 @@
   "description": "Production-ready English learning app for Software Engineers based on Stephen Krashen's Comprehensible Input hypothesis",
   "scripts": {
     "ng": "ng",
+    "prebuild": "node scripts/set-env.js",
+    "build": "ng build",
     "start": "ng serve",
     "dev": "ng serve",
-    "build": "ng build",
     "watch": "ng build --watch --configuration development",
     "lint": "ng lint"
   },

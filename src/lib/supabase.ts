@@ -1,17 +1,6 @@
 import { createClient, SupabaseClient } from '@supabase/supabase-js';
+import { environment } from '../environments/environment';
 import { SavedVocabularyItem } from '../app/core/models/user.model';
-
-// Resolve environment variables safely across build runners without polluting browser types
-const getEnvVar = (key: string): string | undefined => {
-  if (typeof import.meta !== 'undefined' && (import.meta as any).env?.[key]) {
-    return (import.meta as any).env[key];
-  }
-  const g = typeof globalThis !== 'undefined' ? (globalThis as any) : undefined;
-  return g?.process?.env?.[key];
-};
-
-const supabaseUrl = getEnvVar('VITE_SUPABASE_URL') || 'https://placeholder-project.supabase.co';
-const supabaseAnonKey = getEnvVar('VITE_SUPABASE_ANON_KEY') || 'placeholder-anon-key';
 
 export interface DatabaseUserProgress {
   id?: string;
@@ -25,10 +14,14 @@ export interface DatabaseUserProgress {
   updated_at?: string;
 }
 
-export const supabase: SupabaseClient = createClient(supabaseUrl, supabaseAnonKey, {
-  auth: {
-    persistSession: true,
-    autoRefreshToken: true,
-    detectSessionInUrl: true,
-  },
-});
+export const supabase: SupabaseClient = createClient(
+  environment.supabaseUrl,
+  environment.supabaseAnonKey,
+  {
+    auth: {
+      persistSession: true,
+      autoRefreshToken: true,
+      detectSessionInUrl: true,
+    },
+  }
+);
