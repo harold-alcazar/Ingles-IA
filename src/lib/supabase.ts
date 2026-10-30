@@ -1,4 +1,5 @@
 import { createClient, SupabaseClient } from '@supabase/supabase-js';
+import { SavedVocabularyItem } from '../app/core/models/user.model';
 
 // Resolve environment variables safely across build runners without polluting browser types
 const getEnvVar = (key: string): string | undefined => {
@@ -19,12 +20,7 @@ export interface DatabaseUserProgress {
   streak: number;
   current_level: string;
   completed_mission_ids: string[];
-  saved_vocabulary: Array<{
-    term: string;
-    translation: string;
-    context: string;
-    saved_at: string;
-  }>;
+  saved_vocabulary: SavedVocabularyItem[];
   last_activity_date: string;
   updated_at?: string;
 }
