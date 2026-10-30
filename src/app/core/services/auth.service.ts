@@ -44,7 +44,13 @@ export class AuthService {
   public async signUp(email: string, password: string): Promise<{ error: Error | null }> {
     this.isLoading.set(true);
     try {
-      const { error } = await supabase.auth.signUp({ email, password });
+      const { error } = await supabase.auth.signUp({
+        email,
+        password,
+        options: {
+          emailRedirectTo: typeof window !== 'undefined' ? window.location.origin : undefined
+        }
+      });
       return { error };
     } finally {
       this.isLoading.set(false);
