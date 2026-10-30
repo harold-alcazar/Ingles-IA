@@ -1,15 +1,16 @@
 import { createClient, SupabaseClient } from '@supabase/supabase-js';
 
-// Resolve environment variables safely across build runners (Vite / Angular Application Builder / Process)
-const supabaseUrl =
-  (typeof import.meta !== 'undefined' && (import.meta as any).env?.['VITE_SUPABASE_URL']) ||
-  (typeof process !== 'undefined' && process.env?.['VITE_SUPABASE_URL']) ||
-  'https://placeholder-project.supabase.co';
+// Resolve environment variables safely across build runners without polluting browser types
+const getEnvVar = (key: string): string | undefined => {
+  if (typeof import.meta !== 'undefined' && (import.meta as any).env?.[key]) {
+    return (import.meta as any).env[key];
+  }
+  const g = typeof globalThis !== 'undefined' ? (globalThis as any) : undefined;
+  return g?.process?.env?.[key];
+};
 
-const supabaseAnonKey =
-  (typeof import.meta !== 'undefined' && (import.meta as any).env?.['VITE_SUPABASE_ANON_KEY']) ||
-  (typeof process !== 'undefined' && process.env?.['VITE_SUPABASE_ANON_KEY']) ||
-  'placeholder-anon-key';
+const supabaseUrl = getEnvVar('VITE_SUPABASE_URL') || 'https://placeholder-project.supabase.co';
+const supabaseAnonKey = getEnvVar('VITE_SUPABASE_ANON_KEY') || 'placeholder-anon-key';
 
 export interface DatabaseUserProgress {
   id?: string;
