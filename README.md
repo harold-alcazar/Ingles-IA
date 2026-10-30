@@ -4,7 +4,7 @@ Production-ready, modular web application for acquiring software engineering Eng
 
 Built with **Angular 19+ (Signals, Standalone Components, Control Flow)**, **Tailwind CSS**, and **Supabase (Auth & Postgres Upsert Sync)**, optimized for zero-config **Vercel** deployment.
 
----
+----
 
 ## 🏛️ Pedagogical & Architectural Foundation
 
