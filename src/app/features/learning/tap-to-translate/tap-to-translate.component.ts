@@ -14,9 +14,11 @@ import { ProgressService } from '../../../core/services/progress.service';
       <button
         type="button"
         (click)="togglePopover($event)"
-        [class.bg-sky-500/20]="isOpen()"
-        [class.border-sky-400]="isOpen()"
-        class="inline-flex items-center gap-1 px-1.5 py-0.5 rounded text-sky-300 font-medium border-b-2 border-dashed border-sky-500/60 hover:bg-sky-500/15 hover:border-sky-400 transition-all cursor-pointer focus:outline-none"
+        [ngClass]="{
+          'bg-sky-500/20 border-sky-400': isOpen(),
+          'border-sky-500/60': !isOpen()
+        }"
+        class="inline-flex items-center gap-1 px-1.5 py-0.5 rounded text-sky-300 font-medium border-b-2 border-dashed hover:bg-sky-500/15 hover:border-sky-400 transition-all cursor-pointer focus:outline-none"
         [title]="'Click for translation & software context'"
       >
         <span>{{ token().text }}</span>
